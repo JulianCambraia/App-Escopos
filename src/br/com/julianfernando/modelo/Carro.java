@@ -7,6 +7,8 @@ public class Carro {
 	private String modelo;
 	
 	private Integer modeloAno;
+	
+	private Double valorSemImpostos;
 
 	public String getMarca() {
 		return marca;
@@ -30,6 +32,14 @@ public class Carro {
 
 	public void setModeloAno(Integer modeloAno) {
 		this.modeloAno = modeloAno;
+	}
+
+	public Double getValorSemImpostos() {
+		return valorSemImpostos;
+	}
+
+	public void setValorSemImpostos(Double valorSemImpostos) {
+		this.valorSemImpostos = valorSemImpostos;
 	}
 
 }

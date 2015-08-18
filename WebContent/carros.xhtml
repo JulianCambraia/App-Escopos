@@ -19,9 +19,15 @@
 						<h:inputText value="#{carroBean.carro.modelo}" id="campo-modelo" required="true" requiredMessage="Campo modelo do veículo é de preenchimento obrigátorio" />
 						
 						<h:outputLabel value="Modelo ano:" for="campo-modelo-ano" />
-						<h:inputText value="#{carroBean.carro.modeloAno}" size="5" maxlength="4" id="campo-modelo-ano" converterMessage="Modelo ano inválido" required="true" requiredMessage="Campo obrigatório">
+						<h:inputText value="#{carroBean.carro.modeloAno}" size="5" maxlength="4" id="campo-modelo-ano" converterMessage="Modelo ano inválido" required="true" requiredMessage="Campo ano obrigatório">
 							<f:convertNumber integerOnly="true" minIntegerDigits="2" maxIntegerDigits="4" />
 						</h:inputText>
+						
+						<h:outputLabel value="Valor sem impostos:" for="campo-valor-sem-impostos" />
+						<h:inputText value="#{carroBean.carro.valorSemImpostos}" size="14" required="true" requiredMessage="Campo valor é de preenchimento obrigatório." converterMessage="Valor do veículo inváido." >
+							<f:convertNumber minFractionDigits="2" maxFractionDigits="2" pattern="#,##0.00;(#,##0.00)"/>
+						</h:inputText>
+						
 					</h:panelGrid>
 					<h:commandButton action="#{carroBean.adicionaCarro()}"
 						value="Adicionar" />
@@ -44,6 +50,12 @@
 						<h:column>
 							<f:facet name="header">Ano (modelo)</f:facet>
 							#{carro.modeloAno}
+						</h:column>
+						<h:column>
+							<f:facet name="header">Valor (sem impostos)</f:facet>
+							<h:outputText value="#{carro.valorSemImpostos}">
+								<f:convertNumber locale="pt_BR" type="currency"/>
+							</h:outputText>
 						</h:column>	
 					</h:dataTable>
 				</fieldset>
