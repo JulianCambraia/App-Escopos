@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition template="/index.xhtml">
+	<ui:define name="container">
+		<h:body>
+			<h:form>
+				<h1>Cadastro de Veículos</h1>
+				<fieldset>
+					<legend>Carros</legend>
+					<h:panelGrid columns="2">
+						<h:outputLabel value="Marca:" for="campo-marca" />
+						<h:inputText value="#{carroBean.carro.marca}" id="campo-marca" required="true" requiredMessage="Campo marca do veículo é de preenchimento obrigatório." />
+
+						<h:outputLabel value="Modelo" for="campo-modelo" />
+						<h:inputText value="#{carroBean.carro.modelo}" id="campo-modelo" required="true" requiredMessage="Campo modelo do veículo é de preenchimento obrigátorio" />
+						
+						<h:outputLabel value="Modelo ano:" for="campo-modelo-ano" />
+						<h:inputText value="#{carroBean.carro.modeloAno}" size="5" maxlength="4" id="campo-modelo-ano" converterMessage="Modelo ano inválido" required="true" requiredMessage="Campo obrigatório">
+							<f:convertNumber integerOnly="true" minIntegerDigits="2" maxIntegerDigits="4" />
+						</h:inputText>
+					</h:panelGrid>
+					<h:commandButton action="#{carroBean.adicionaCarro()}"
+						value="Adicionar" />
+				</fieldset>
+				<h:panelGroup rendered="#{not empty carroBean.carros}">
+				<fieldset>
+					<legend>Lista dos Veículos</legend>
+					<h:dataTable border="1" value="#{carroBean.carros}" var="carro" rendered="#{not empty carroBean.carros}"
+						styleClass="tableField" rowClasses="tableOddRow,tableEvenRow"
+						headerClass="tableHeader">
+						<f:facet name="header">Veículos</f:facet>
+						<h:column>
+							<f:facet name="header">Marca</f:facet>
+								#{carro.marca}
+							</h:column>
+						<h:column>
+							<f:facet name="header">Modelo</f:facet>
+								#{carro.modelo}
+							</h:column>
+						<h:column>
+							<f:facet name="header">Ano (modelo)</f:facet>
+							#{carro.modeloAno}
+						</h:column>	
+					</h:dataTable>
+				</fieldset>
+				</h:panelGroup>
+			</h:form>
+		</h:body>
+	</ui:define>
+</ui:composition>
+</html>
