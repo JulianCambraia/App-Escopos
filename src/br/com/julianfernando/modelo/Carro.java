@@ -1,5 +1,7 @@
 package br.com.julianfernando.modelo;
 
+import java.util.Date;
+
 public class Carro {
 	
 	private String marca;
@@ -9,6 +11,8 @@ public class Carro {
 	private Integer modeloAno;
 	
 	private Double valorSemImpostos;
+	
+	private Date dataLocacao;
 
 	public String getMarca() {
 		return marca;
@@ -40,6 +44,14 @@ public class Carro {
 
 	public void setValorSemImpostos(Double valorSemImpostos) {
 		this.valorSemImpostos = valorSemImpostos;
+	}
+
+	public Date getDataLocacao() {
+		return dataLocacao;
+	}
+
+	public void setDataLocacao(Date dataLocacao) {
+		this.dataLocacao = dataLocacao;
 	}
 
 }
