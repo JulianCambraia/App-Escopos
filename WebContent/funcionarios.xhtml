@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition template="/index.xhtml">
+	<ui:define name="container">
+		<h:body>
+			<h:form>
+				<h1>Cadastro de Funcionários</h1>
+				<fieldset>
+					<legend>Funcionario</legend>
+					<h:inputHidden value="#{funcionarioBean.funcionario.codigoHidden}" />
+					<h:panelGrid columns="2">
+						<h:outputLabel value="Código" for="campo-codigo" />
+						<h:inputText readonly="true"
+							value="#{funcionarioBean.funcionario.codigo}" id="campo-codigo"
+							size="5" maxlength="5" />
+
+						<h:outputLabel value="Data de aniversário:"	for="campo-data-aniversario" />
+						<h:inputText value="#{funcionarioBean.funcionario.aniversario}"
+							id="campo-data-aniversario" size="12" maxlength="10" required="true" requiredMessage="Campo data aniversário é de preenchimento obrigatório" converterMessage="Data de aniversário inválida.">
+							<f:convertDateTime locale="pt_BR" type="date" />
+						</h:inputText>
+
+						<h:outputLabel value="Salário:" for="campo-salario" />
+						<h:inputText value="#{funcionarioBean.funcionario.salario}"	id="campo-salario" size="15" maxlength="14" required="true" requiredMessage="Campo salário é de preenchimento obrigatório." converterMessage="Valor para Salário inválido.">
+							<f:convertNumber currencySymbol="R$" minFractionDigits="2" maxFractionDigits="2" pattern="#,##0.00;(#,##0.00)"/>
+						</h:inputText>
+					</h:panelGrid>
+					<h:commandButton action="#{funcionarioBean.adicionar()}" value="Adicionar" />
+				</fieldset>
+				<h:panelGroup rendered="#{not empty funcionarioBean.funcionarios}">
+					<fieldset>
+						<legend>Lista de funcionários</legend>
+						<h:dataTable border="1" value="#{funcionarioBean.funcionarios}"
+							var="funcionario"
+							rendered="#{not empty funcionarioBean.funcionarios}"
+							styleClass="tableField" rowClasses="tableOddRow,tableEvenRow"
+							headerClass="tableHeader">
+
+							<f:facet name="header">Funcionários</f:facet>
+							<h:column>
+								<f:facet name="header">Código</f:facet>
+								#{funcionario.codigo}
+							</h:column>
+
+							<h:column>
+								<f:facet name="header">Data de aniversário</f:facet>
+								<h:outputText value="#{funcionario.aniversario}">
+									<f:convertDateTime locale="pt_BR" pattern="dd/MM/yyyy"/>
+								</h:outputText>
+							</h:column>
+
+							<h:column>
+								<f:facet name="header">Salário</f:facet>
+								<h:outputText value="#{funcionario.salario}">
+									<f:convertNumber locale="pt_BR" type="currency"/>
+								</h:outputText>
+							</h:column>
+						</h:dataTable>
+					</fieldset>
+				</h:panelGroup>
+			</h:form>
+		</h:body>
+	</ui:define>
+</ui:composition>
+</html>
