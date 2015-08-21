@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition template="/index.xhtml">
+	<ui:define name="container">
+		<h:body>
+			<h:form>
+				<fieldset>
+					<legend>Cotação do Dólar</legend>
+					<h:panelGrid columns="2">
+						<h:outputLabel value="Valor:" for="campo-valor" />
+						<h:inputText value="#{cotacaoDolarBean.cotacaoDolar.valor}"
+							id="campo-valor" required="true"
+							requiredMessage="Campo valor é de preenchimento obrigatório"
+							converterMessage="Valor da moeda inválido">
+							<f:convertNumber minFractionDigits="2" maxFractionDigits="2"
+								pattern="#,##0.00;(#,##0.00)" />
+						</h:inputText>
+						<h:outputLabel value="Variação do Dólar" for="campo-porcentagem" />
+						<h:inputText value="#{cotacaoDolarBean.cotacaoDolar.porcentagem}"
+							id="campo-porcentagem" required="true"
+							requiredMessage="Campo percentual é de preenchimento obrigatório."
+							converterMessage="Porcentagem inválida!">
+							<f:convertNumber minFractionDigits="2" maxFractionDigits="5" />
+						</h:inputText>
+						<h:outputLabel value="Data:" for="campo-periodo" title="HH:mm dd/MM/yyyy"/>
+						<h:inputText value="#{cotacaoDolarBean.cotacaoDolar.dataHoraCotacao}"
+							id="campo-periodo" size="16" maxlength="16" required="true"
+							requiredMessage="Campo data e hora são de preenchimento obrigatório."
+							converterMessage="Data e hora devem estar no formato HH:mm dd/MM/yyyy">
+							<f:convertDateTime locale="pt_BR" pattern="HH:mm dd/MM/yyyy"/>
+						</h:inputText>
+
+					</h:panelGrid>
+					<h:commandButton action="#{cotacaoDolarBean.adicionar()}"
+						value="Adicionar" />
+				</fieldset>
+				<h:panelGroup rendered="#{not empty cotacaoDolarBean.cotacaoDolars}">
+					<fieldset>
+						<legend>Cotações</legend>
+						<h:dataTable border="1" value="#{cotacaoDolarBean.cotacaoDolars}"
+							var="cotacoes"
+							rendered="#{not empty cotacaoDolarBean.cotacaoDolars}"
+							styleClass="tableField" rowClasses="tableOddRow,tableEvenRow"
+							headerClass="tableHeader">
+
+							<f:facet name="header">Lista de Cotações do Dólar</f:facet>
+							<h:column>
+								<f:facet name="header">Valor</f:facet>
+								<h:outputText value="#{cotacoes.valor}">
+									<f:convertNumber locale="pt_BR" type="currency" />
+								</h:outputText>
+							</h:column>
+
+							<h:column>
+								<f:facet name="header">Variação do Dólar (%)</f:facet>
+								<h:outputText value="#{cotacoes.porcentagem}">
+									<f:convertNumber type="percent" maxFractionDigits="5"/>
+								</h:outputText>
+							</h:column>
+
+							<h:column>
+								<f:facet name="header">Data e Hora</f:facet>
+								<h:outputText value="#{cotacoes.dataHoraCotacao}">
+									<f:convertDateTime locale="pt_BR"
+										pattern="MM/dd/yyyy HH:mm:ss" />
+								</h:outputText>
+							</h:column>
+						</h:dataTable>
+					</fieldset>
+				</h:panelGroup>
+			</h:form>
+		</h:body>
+	</ui:define>
+</ui:composition>
+</html>
