@@ -13,16 +13,17 @@
 					<legend>Produto</legend>
 					<h:panelGrid columns="2">
 						<h:outputLabel value="Código:" for="campo-codigo" />
-						<h:inputText id="campo-codigo" size="6" maxlength="5" validatorMessage="Código deve conter no mínimo 4 dígitos sendo o primeiro uma letra maiúscula e os demais letras e números"
+						<h:inputText id="campo-codigo" size="11" maxlength="10"
+							validatorMessage="Código deve conter no mínimo 4 dígitos sendo o primeiro uma letra maiúscula e os demais letras e números"
 							value="#{produtoBean.produto.codigo}" required="true"
 							requiredMessage="Campo Código é de preenchimento obrigatório.">
 							<f:validateRegex pattern="^[A-Z]{1}+[A-Za-z0-9]{3,10}" />
 						</h:inputText>
 						<h:outputLabel value="Nome:" for="campo-nome" />
-						<h:inputText value="#{produtoBean.produto.nome}" id="campo-nome" size="60" maxlength="100"
-							required="true"
+						<h:inputText value="#{produtoBean.produto.nome}" id="campo-nome"
+							size="60" maxlength="100" required="true"
 							requiredMessage="Campo Nome é de preenchimento obrigatório.">
-							<f:validateRegex pattern="^[A-Za-zÀ-ú\s]{1,}" />
+							<f:validateRegex pattern="[A-Za-z0-9À-ú\s]+" />
 						</h:inputText>
 						<h:outputLabel value="Tamanho:" for="campo-tamanho" />
 						<h:inputText value="#{produtoBean.produto.tamanho}"
@@ -40,8 +41,42 @@
 							<f:validateDoubleRange minimum="0.1" />
 						</h:inputText>
 					</h:panelGrid>
-					<h:commandButton action="#{produtoBean.adiciona()}"	value="Adicionar" />
+					<h:commandButton action="#{produtoBean.adiciona()}"
+						value="Adicionar" />
 				</fieldset>
+
+				<h:panelGroup rendered="#{not empty produtoBean.produtos}">
+					<fieldset>
+						<legend>Lista de Produtos</legend>
+						<h:dataTable border="1" value="#{produtoBean.produtos}" var="produto"
+							rendered="#{not empty produtoBean.produtos}"
+							styleClass="tableField" rowClasses="tableOddRow,tableEvenRow"
+							headerClass="tableHeader">
+							
+							<f:facet name="header">Produtos</f:facet>
+							<h:column>
+								<f:facet name="header">Código</f:facet>
+								#{produto.codigo}
+							</h:column>
+							<h:column>
+								<f:facet name="header">Nome</f:facet>
+								#{produto.nome}
+							</h:column>
+							<h:column>
+								<f:facet name="header">Tamanho</f:facet>
+								<h:outputText value="#{produto.tamanho}">
+									<f:convertNumber integerOnly="true"/>
+								</h:outputText>
+							</h:column>
+							<h:column>
+								<f:facet name="header">Volume</f:facet>
+								<h:outputText value="#{produto.volume}">
+									<f:convertNumber minFractionDigits="2" maxFractionDigits="6"/>
+								</h:outputText>
+							</h:column>
+						</h:dataTable>
+					</fieldset>
+				</h:panelGroup>
 			</h:form>
 		</h:body>
 	</ui:define>
