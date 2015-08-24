@@ -13,10 +13,14 @@
 					<legend>Carros</legend>
 					<h:panelGrid columns="2">
 						<h:outputLabel value="Marca:" for="campo-marca" />
-						<h:inputText value="#{carroBean.carro.marca}" id="campo-marca" required="true" requiredMessage="Campo marca do veículo é de preenchimento obrigatório." />
+						<h:inputText value="#{carroBean.carro.marca}" id="campo-marca" required="true" requiredMessage="Campo marca do veículo é de preenchimento obrigatório.">
+							<f:validateLength minimum="1" maximum="100"/>
+						</h:inputText>
 
 						<h:outputLabel value="Modelo" for="campo-modelo" />
-						<h:inputText value="#{carroBean.carro.modelo}" id="campo-modelo" required="true" requiredMessage="Campo modelo do veículo é de preenchimento obrigátorio" />
+						<h:inputText value="#{carroBean.carro.modelo}" id="campo-modelo" required="true" requiredMessage="Campo modelo do veículo é de preenchimento obrigátorio">
+							<f:validateLength minimum="1" maximum="100"/>
+						</h:inputText>
 						
 						<h:outputLabel value="Modelo ano:" for="campo-modelo-ano" />
 						<h:inputText value="#{carroBean.carro.modeloAno}" size="5" maxlength="4" id="campo-modelo-ano" converterMessage="Modelo ano inválido" required="true" requiredMessage="Campo ano obrigatório">

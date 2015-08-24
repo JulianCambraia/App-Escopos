@@ -2,6 +2,7 @@
     <wb-module deploy-name="EscoposJSF">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/resources"/>
         <property name="context-root" value="EscoposJSF"/>
         <property name="java-output-path" value="/EscoposJSF/build/classes"/>
     </wb-module>

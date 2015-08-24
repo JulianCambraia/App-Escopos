@@ -12,6 +12,8 @@ public class Funcionario {
 	
 	private Date aniversario;
 	
+	private Integer idade;
+	
 	public Funcionario(Long codigo) {
 		super();
 		this.setCodigo(codigo);
@@ -47,5 +49,13 @@ public class Funcionario {
 
 	public void setCodigoHidden(Long codigoHidden) {
 		this.codigoHidden = codigoHidden;
+	}
+
+	public Integer getIdade() {
+		return idade;
+	}
+
+	public void setIdade(Integer idade) {
+		this.idade = idade;
 	}
 }

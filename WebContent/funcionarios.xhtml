@@ -17,7 +17,11 @@
 						<h:inputText readonly="true"
 							value="#{funcionarioBean.funcionario.codigo}" id="campo-codigo"
 							size="5" maxlength="5" />
-
+						<h:outputLabel value="Idade:" for="campo-idade" />
+						<h:inputText value="#{funcionarioBean.funcionario.idade}" id="campo-idade" size="4" maxlength="3" required="true" requiredMessage="Campo Idade é de preenchimento obrigatório">
+							<f:validateLongRange minimum="1" maximum="100"/>
+							<h:message for="campo-idade"/>
+						</h:inputText>
 						<h:outputLabel value="Data de aniversário:"	for="campo-data-aniversario" />
 						<h:inputText value="#{funcionarioBean.funcionario.aniversario}"
 							id="campo-data-aniversario" size="12" maxlength="10" required="true" requiredMessage="Campo data aniversário é de preenchimento obrigatório" converterMessage="Data de aniversário inválida.">
@@ -27,6 +31,7 @@
 						<h:outputLabel value="Salário:" for="campo-salario" />
 						<h:inputText value="#{funcionarioBean.funcionario.salario}"	id="campo-salario" size="15" maxlength="14" required="true" requiredMessage="Campo salário é de preenchimento obrigatório." converterMessage="Valor para Salário inválido.">
 							<f:convertNumber currencySymbol="R$" minFractionDigits="2" maxFractionDigits="2" pattern="#,##0.00;(#,##0.00)"/>
+							<f:validateDoubleRange minimum="1" maximum="100000"/>
 						</h:inputText>
 					</h:panelGrid>
 					<h:commandButton action="#{funcionarioBean.adicionar()}" value="Adicionar" />
