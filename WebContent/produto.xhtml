@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition template="/index.xhtml">
+	<ui:define name="container">
+		<h:body>
+			<h1>Cadastro de Produtos</h1>
+			<h:form id="produto">
+				<fieldset>
+					<legend>Produto</legend>
+					<h:panelGrid columns="2">
+						<h:outputLabel value="Código:" for="campo-codigo" />
+						<h:inputText id="campo-codigo" size="6" maxlength="5" validatorMessage="Código deve conter no mínimo 4 dígitos sendo o primeiro uma letra maiúscula e os demais letras e números"
+							value="#{produtoBean.produto.codigo}" required="true"
+							requiredMessage="Campo Código é de preenchimento obrigatório.">
+							<f:validateRegex pattern="^[A-Z]{1}+[A-Za-z0-9]{3,10}" />
+						</h:inputText>
+						<h:outputLabel value="Nome:" for="campo-nome" />
+						<h:inputText value="#{produtoBean.produto.nome}" id="campo-nome" size="60" maxlength="100"
+							required="true"
+							requiredMessage="Campo Nome é de preenchimento obrigatório.">
+							<f:validateRegex pattern="^[A-Za-zÀ-ú\s]{1,}" />
+						</h:inputText>
+						<h:outputLabel value="Tamanho:" for="campo-tamanho" />
+						<h:inputText value="#{produtoBean.produto.tamanho}"
+							id="campo-tamanho" required="true" size="5" maxlength="4"
+							requiredMessage="Campo Tamanho é de preenchimento obrigatório."
+							converterMessage="Tamanho deve ser um número válido 0 a 9.">
+							<f:convertNumber integerOnly="true" />
+							<f:validateLongRange minimum="1" maximum="32" />
+						</h:inputText>
+						<h:outputLabel value="Volume:" for="campo-volume" />
+						<h:inputText value="#{produtoBean.produto.volume}"
+							id="campo-volume" required="true" size="5" maxlength="4"
+							validatorMessage="Volume deve ser um número decimal válido."
+							requiredMessage="Campo Volume é de preenchimento obrigatório.">
+							<f:validateDoubleRange minimum="0.1" />
+						</h:inputText>
+					</h:panelGrid>
+					<h:commandButton action="#{produtoBean.adiciona()}"	value="Adicionar" />
+				</fieldset>
+			</h:form>
+		</h:body>
+	</ui:define>
+</ui:composition>
+</html>
