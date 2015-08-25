@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:composition template="/index.xhtml">
+		<ui:define name="container">
+				<h1>Cadastro de pessoa</h1>
+				<h:form id="pessoa">
+					<fieldset>
+						<legend>Pessoa</legend>
+						<h:panelGrid columns="2">
+							<h:outputLabel value="Código:" for="campo-codigo" />
+							<h:inputText id="campo-codigo" value="#{pessoaBean.pessoa.codigo}" size="11" maxlength="10" />
+							
+							<h:outputLabel value="Nome:" for="campo-nome" />
+							<h:inputText id="campo-nome" value="#{pessoaBean.pessoa.nome}" size="60" maxlength="100"/>
+							
+							<h:outputLabel value="Sexo:" for="campo-sexo" />
+							<h:selectOneMenu id="campo-sexo" value="#{pessoaBean.pessoa.sexo}" rendered="true">
+							<f:ajax execute="@this" render="@this" />
+								<f:selectItem itemLabel="Selecione uma opção" itemValue="#{null}" noSelectionOption="true"/>
+								<f:selectItems value="#{pessoaBean.sexos.values()}" var="sexo"
+									itemValue="#{sexo}"
+									itemLabel="#{sexo}"
+								/>
+							</h:selectOneMenu>
+							
+							<h:outputLabel value="Idade:" for="campo-idade" />
+							<h:inputText id="campo-idade" value="#{pessoaBean.pessoa.idade}" size="4" maxlength="3"/>
+							
+							<h:outputLabel value="CPF:" for="campo-cpf" />
+							<h:inputText id="campo-cpf" value="#{pessoaBean.pessoa.cpf}" size="14" maxlength="14"/>
+							
+							<h:outputLabel value="Data de nascimento:" for="campo-datanascimento" />
+							<h:inputText id="campo-datanascimento" value="#{pessoaBean.pessoa.dataNascimento}" size="10" maxlength="10">
+								<f:convertDateTime locale="pt_BR" pattern="dd/MM/yyyy" />
+							</h:inputText>
+						</h:panelGrid>
+						<h:commandButton action="#{pessoaBean.adicionar()}"	value="Adicionar" />
+					</fieldset>
+					<h:panelGroup rendered="#{not empty pessoaBean.pessoas}">
+						<fieldset>
+							<legend>Lista de Pessoas</legend>
+							<h:dataTable border="1" value="#{pessoaBean.pessoas}" var="pessoa" rendered="#{not empty pessoaBean.pessoas}" 
+							styleClass="tableField" rowClasses="tableOddRow,tableEvenRow"
+							headerClass="tableHeader"> 
+								<f:facet name="header">Lista de pessoas</f:facet>
+								<h:column>
+									<f:facet name="header">Código</f:facet>
+									#{pessoa.codigo}
+								</h:column>
+								<h:column>
+									<f:facet name="header">Nome</f:facet>
+									#{pessoa.nome}
+								</h:column>
+								<h:column>
+									<f:facet name="header">Sexo</f:facet>
+									#{pessoa.sexo}
+								</h:column>
+								<h:column>
+									<f:facet name="header">Idade</f:facet>
+									#{pessoa.idade}
+								</h:column>
+								<h:column>
+									<f:facet name="header">CPF</f:facet>
+										#{pessoa.cpf}
+								</h:column>
+								<h:column>
+									<f:facet name="header">Data de Nascimento</f:facet>
+									<h:outputText value="#{pessoa.dataNascimento}">
+										<f:convertDateTime locale="pt_BR"/>
+									</h:outputText>
+								</h:column>
+							</h:dataTable>
+						</fieldset>
+					</h:panelGroup>
+				</h:form>
+		</ui:define>
+	</ui:composition>
+</html>
