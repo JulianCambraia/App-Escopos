@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition template="/index.xhtml">
+	<ui:define name="container">
+		<h1>Cadastro de Endereço</h1>
+		<h:form id="endereco">
+			<fieldset>
+				<legend>Endereço</legend>
+				<h:panelGrid columns="2">
+					<h:outputLabel value="Código:" for="campo-codigo" />
+					<h:inputText id="campo-codigo"
+						value="#{enderecoBean.endereco.codigo}" readonly="true" size="6"
+						maxlength="6" />
+
+					<h:outputLabel value="Descrição:" for="campo-descricao" />
+					<h:inputText id="campo-descricao"
+						value="#{enderecoBean.endereco.descricao}" size="60"
+						maxlength="100" />
+
+
+					<h:outputLabel value="Número:" for="campo-numero" />
+					<h:inputText id="campo-numero"
+						value="#{enderecoBean.endereco.numero}" size="6" maxlength="6" />
+
+					<h:outputLabel value="CEP:" for="campo-cep" />
+					<h:inputText id="campo-cep" value="#{enderecoBean.endereco.cep}"
+						size="10" maxlength="11" />
+
+					<h:outputLabel value="Complemento:" for="campo-complemento" />
+					<h:inputTextarea id="campo-complemento"
+						value="#{enderecoBean.endereco.complemento}" cols="100" rows="5" />
+				</h:panelGrid>
+				<h:commandButton action="#{enderecoBean.adicionar()}"
+					value="Adicionar" />
+			</fieldset>
+			<h:panelGroup rendered="#{not empty enderecoBean.enderecos}">
+				<fieldset>
+					<legend>Lista de Endereços</legend>
+					<h:dataTable id="campo-endereco" border="1" value="#{enderecoBean.enderecos}"
+						var="endereco" styleClass="tableField"
+						rowClasses="tableOddRow,tableEvenRow" headerClass="tableHeader">
+						
+						<f:facet name="header">Lista de Endereços</f:facet>
+						<h:column>
+							<f:facet name="header">Código</f:facet>
+							#{endereco.codigo}
+						</h:column>
+						<h:column>
+							<f:facet name="header">Descrição</f:facet>
+							#{endereco.descricao}
+						</h:column>
+						<h:column>
+							<f:facet name="header">Número</f:facet>
+							#{endereco.numero}
+						</h:column>
+						<h:column>
+							<f:facet name="header">Cep</f:facet>
+							#{endereco.cep}
+						</h:column>
+						<h:column>
+							<f:facet name="header">Complemento</f:facet>
+							#{endereco.complemento}
+						</h:column>
+					</h:dataTable>
+				</fieldset>
+			</h:panelGroup>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
