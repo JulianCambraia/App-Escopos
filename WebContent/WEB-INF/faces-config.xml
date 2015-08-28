@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<faces-config
-    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
-    version="2.2">
-	
+<faces-config xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+	version="2.2">
+
 	<application>
 		<locale-config>
 			<default-locale>pt_BR</default-locale>
 		</locale-config>
 		<message-bundle>Messages</message-bundle>
 	</application>
+
+	<converter>
+		<converter-id>converter.ConversorDeTelefone</converter-id>
+		<converter-class>br.com.julianfernando.converters.ConversorDeNumeroTelefone</converter-class>
+	</converter>
+
+	<converter>
+		<converter-id>converter.ConversorDePais</converter-id>
+		<converter-class>br.com.julianfernando.converters.ConversorDePais</converter-class>
+	</converter>
+	
+	<converter>
+		<converter-id>converter.ConversorDeArea</converter-id>
+		<converter-class>br.com.julianfernando.converters.ConversorDeArea</converter-class>
+	</converter>
+
+
+
 </faces-config>

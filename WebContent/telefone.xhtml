@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition template="/index.xhtml">
+	<ui:define name="container">
+		<ui:define name="messages">
+			<h:messages for="numeroTelefone" />
+		</ui:define>
+		<h:form id="telefone">
+			<h1>Cadastro de Telefone</h1>
+			<fieldset>
+				<legend>Telefone</legend>
+				<h:panelGrid columns="3">
+					<h:outputLabel value="Pais" for="campo-codigopais" />
+					<h:outputLabel value="Área" for="campo-codigoarea" />
+					<h:outputLabel value="Número" for="campo-numero" />
+					<h:inputText value="#{telefoneBean.telefone.codigoPais}" id="campo-codigopais" size="3" maxlength="3">
+						<f:converter converterId="converter.ConversorDePais" />
+						<f:validator validatorId="br.com.julianfernando.ValidadorDeCodigoPais"/>
+					</h:inputText>
+
+					<h:inputText value="#{telefoneBean.telefone.codigoArea}" id="campo-codigoarea" size="3" maxlength="3">
+						<f:converter converterId="converter.ConversorDeArea" />
+						<f:validator validatorId="br.com.julianfernando.ValidadorDeArea"/>
+					</h:inputText>
+
+					<h:inputText value="#{telefoneBean.telefone.numeroTelefone}" id="campo-numero" size="12" maxlength="12">
+						<f:converter converterId="converter.ConversorDeTelefone" />
+						<f:validator validatorId="br.com.julianfernando.ValidadorDeNumero"/>  
+					</h:inputText>
+				</h:panelGrid>
+				<h:commandButton action="#{telefoneBean.adicionar()}" value="Adiciona" />
+			</fieldset>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
