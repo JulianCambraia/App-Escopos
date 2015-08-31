@@ -23,13 +23,19 @@ public class Pessoa {
 	@Max(value=120, message="Idade superior a 120 anos ou nula.")
 	private Integer idade;
 	
-	@NotNull(message="Campo cpf não pode ser nulo.")
-	@Pattern(regexp="[0-9]{3}\\.[0-9]{3}\\.[0-9]{3}\\-[0-9]{2}",message="CPF tamanho inválido.")
-	private String cpf;
+	private CPF cpf;
+	
+	private RIC ric;
 	
 	@NotNull(message="Campo Data de nascimento preenchimento obrigatório.")
 	private Date dataNascimento;
 
+	public Pessoa() {
+		super();
+		this.cpf=null;
+		this.ric=null;
+	}
+	
 	public String getCodigo() {
 		return codigo;
 	}
@@ -37,6 +43,7 @@ public class Pessoa {
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
+
 
 	public String getNome() {
 		return nome;
@@ -62,11 +69,11 @@ public class Pessoa {
 		this.idade = idade;
 	}
 
-	public String getCpf() {
+	public CPF getCpf() {
 		return cpf;
 	}
 
-	public void setCpf(String cpf) {
+	public void setCpf(CPF cpf) {
 		this.cpf = cpf;
 	}
 
@@ -76,6 +83,19 @@ public class Pessoa {
 
 	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
+	}
+
+	public RIC getRic() {
+		return ric;
+	}
+
+	public void setRic(RIC ric) {
+		this.ric = ric;
+	}
+	
+	@Override
+	public String toString() {
+		return "Pessoa [cpf=" + cpf.getNumeroIdentificador() + cpf.getPrimeiroNumeroVerificador() + cpf.getSegundoNumeroVerificador() + "]";
 	}
 	
 }

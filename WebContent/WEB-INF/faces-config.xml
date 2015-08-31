@@ -20,12 +20,18 @@
 		<converter-id>converter.ConversorDePais</converter-id>
 		<converter-class>br.com.julianfernando.converters.ConversorDePais</converter-class>
 	</converter>
-	
+
 	<converter>
 		<converter-id>converter.ConversorDeArea</converter-id>
 		<converter-class>br.com.julianfernando.converters.ConversorDeArea</converter-class>
 	</converter>
 
-
-
+	<converter>
+		<converter-id>converter.ConversorDeCPF</converter-id>
+		<converter-class>br.com.julianfernando.converters.ConversorDeCPF</converter-class>
+	</converter>
+	<converter>
+		<converter-id>converter.ConversorDeRIC</converter-id>
+		<converter-class>br.com.julianfernando.converters.ConversorRIC</converter-class>
+	</converter>
 </faces-config>
