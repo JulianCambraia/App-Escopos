@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:composition template="/index.xhtml">
+		<ui:define name="container">
+			<h1>Número Primo</h1>
+			<h:form id="frmPrimo">
+				<fieldset>
+					<legend>Número primo</legend>
+						<h:outputLabel value="Informe um número primo:" for="campo-numero" />
+						<h:inputText value="#{primoBean.primo}" id="campo-numero" size="6" maxlength="6" converterMessage="Este não parece ser um número inteiro.">
+							<f:convertNumber integerOnly="true" minIntegerDigits="0"  locale="pt_BR"/>
+						</h:inputText>
+				</fieldset>
+				<h:commandButton value="Validar" />
+			</h:form>			
+		</ui:define>
+	</ui:composition>
+</html>
