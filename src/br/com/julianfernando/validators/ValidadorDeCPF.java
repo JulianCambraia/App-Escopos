@@ -43,6 +43,7 @@ public class ValidadorDeCPF implements Validator {
 		
 		return primeiroDigito == primeiroDigitoVerificador && segundoDigito == segundoDigitoVerificador;
 	}
+	
 	private long modulo11(long numero) {
 		// acumulador
 		long soma = 0;

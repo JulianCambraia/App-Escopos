@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition template="/index.xhtml">
+	<ui:define name="container">
+		<h1>Período de Inscrição</h1>
+		<h:form>
+			<fieldset>
+				<legend>Período</legend>
+				<h:panelGrid columns="3">
+					<h:outputLabel value="Data inicial:" for="campo-datainicio" />
+					<h:outputLabel value="Data final:" for="campo-datafim" />
+					<h:outputLabel value="Data de inscrição:" for="campo-datainscricao" />
+
+					<h:inputText value="#{periodoBean.periodo.dataInicial}"
+						id="campo-datainicio" size="10" maxlength="10" readonly="true">
+						<f:convertDateTime locale="pt_BR" pattern="dd/MM/yyyy" />
+					</h:inputText>
+
+					<h:inputText value="#{periodoBean.periodo.dataFinal}"
+						id="campo-datafim" size="10" maxlength="10" readonly="true">
+						<f:convertDateTime locale="pt_BR" pattern="dd/MM/yyyy" />
+					</h:inputText>
+					
+					<h:inputText value="#{periodoBean.periodo.dataInscricao}"
+						id="campo-datainscricao" size="10" maxlength="10">
+						<f:convertDateTime locale="pt_BR" pattern="dd/MM/yyyy" />
+						<f:attribute name="dataInicial" value="#{periodoBean.periodo.dataInicial}"/>
+						<f:attribute name="dataFinal" value="#{periodoBean.periodo.dataFinal}"/>
+						<f:validator validatorId="br.com.julianfernando.ValidadorDeDataInscricao"/>
+					</h:inputText>
+					
+				</h:panelGrid>
+			</fieldset>
+			<h:commandButton action="#{periodoBean.enviar()}" value="Enviar" />
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
